@@ -32,7 +32,7 @@
   padding: 0 8px;
 }
 
-.Item .Title::before {
+.Item p.Title::before {
   content: '';
   display: inline-block;
   position: absolute;
@@ -49,9 +49,18 @@
   color: var(--app-blured-color);
 }
 
-.Item.Done .Title::before {
+.Item.Done p.Title::before {
   width: 100%;
   transition: width 0.5s ease-in-out;
+}
+
+.Item input.Title {
+  background-color: var(--app-item-bg-color);
+  color: var(--app-text-color);
+  /* same as p by default */
+  padding-block-start: 1em;
+  padding-block-end: 1em;
+  border: none;
 }
 
 .Item .Checkbox rect,
@@ -76,5 +85,17 @@
 }
 
 .Delete:hover path {
+  fill: var(--app-focused-color);
+}
+
+.Edit {
+  margin-right: 8px;
+}
+
+.Edit path {
+  fill: var(--app-blured-color);
+}
+
+.Edit:hover path {
   fill: var(--app-focused-color);
 }

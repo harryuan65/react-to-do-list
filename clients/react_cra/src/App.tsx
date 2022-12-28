@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import classes from './App.module.css';
 import ToDoItem from './components/ToDoItem';
 import { ToDoItems } from './constants';
-import { ToDoItemData, ToDoItemStatus } from './types';
+import { ToDoItemState, ToDoItemStatus } from './types';
 
 function App() {
   const [newTitle, setNewTitle] = useState<string>('');
-  const [items, setItems] = useState<ToDoItemData[]>(ToDoItems);
+  const [items, setItems] = useState<ToDoItemState[]>(ToDoItems);
 
   const addTodo = () => {
     setItems([
@@ -16,6 +16,26 @@ function App() {
     setNewTitle('');
   };
 
+  const toggleEdit = (id: number) => {
+    setItems(
+      items.map((item) => {
+        if (item.id === id) {
+          item.editing = !item.editing;
+        }
+        return item;
+      })
+    );
+  };
+  const handleEdit = (value: string, id: number) => {
+    setItems(
+      items.map((item) => {
+        if (item.id === id) {
+          item.title = value;
+        }
+        return item;
+      })
+    );
+  };
   const handleClick = (id: number) => {
     setItems(
       items.map((item) => {
@@ -42,7 +62,13 @@ function App() {
       </div>
       <div className={classes.Items}>
         {items.map((item) => (
-          <ToDoItem key={item.id} handleClick={handleClick} item={item} />
+          <ToDoItem
+            key={item.id}
+            toggleEdit={toggleEdit}
+            handleEdit={handleEdit}
+            handleClick={handleClick}
+            item={item}
+          />
         ))}
       </div>
       <div className={classes.additionBar}>

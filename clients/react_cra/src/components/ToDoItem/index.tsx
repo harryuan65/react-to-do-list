@@ -1,9 +1,9 @@
 import React from 'react';
 import { ToDoItemState, ToDoItemStatus } from '../../types';
-import { ReactComponent as Checkbox } from '../../assets/Checkbox__unchecked.svg';
-import { ReactComponent as CheckboxChecked } from '../../assets/Checkbox__checked.svg';
-import { ReactComponent as TrashBin } from '../../assets/TrashBin.svg';
-import { ReactComponent as Edit } from '../../assets/Edit.svg';
+import { ReactComponent as CheckboxSVG } from '../../assets/Checkbox__unchecked.svg';
+import { ReactComponent as CheckboxCheckedSVG } from '../../assets/Checkbox__checked.svg';
+import { ReactComponent as TrashBinSVG } from '../../assets/TrashBin.svg';
+import { ReactComponent as EditSVG } from '../../assets/Edit.svg';
 import classes from './style.module.css';
 
 interface ToDoItemProps {
@@ -25,9 +25,9 @@ const CheckBox = ({
     className: [classes.Action, classes.Checkbox].join(' '),
   };
   if (checked) {
-    return <CheckboxChecked {...props} />;
+    return <CheckboxCheckedSVG {...props} />;
   } else {
-    return <Checkbox {...props} />;
+    return <CheckboxSVG {...props} />;
   }
 };
 
@@ -76,11 +76,11 @@ const ToDoItem = ({
         checked={item.status === ToDoItemStatus.DONE}
       />
       {content}
-      <Edit
+      <EditSVG
         onClick={onToggleEdit}
         className={[classes.Action, classes.Edit].join(' ')}
       />
-      <TrashBin className={[classes.Action, classes.Delete].join(' ')} />
+      <TrashBinSVG className={[classes.Action, classes.Delete].join(' ')} />
     </div>
   );
 };

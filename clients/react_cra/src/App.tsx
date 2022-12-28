@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import classes from './App.module.css';
 // Local test
 import { ToDoItems } from './constants';
-import { ToDoItemStatus } from './types';
+import { ToDoItemData, ToDoItemStatus } from './types';
 import { ReactComponent as Checkbox } from './assets/Checkbox__unchecked.svg';
 import { ReactComponent as CheckboxChecked } from './assets/Checkbox__checked.svg';
 import { ReactComponent as TrashBin } from './assets/TrashBin.svg';
@@ -25,6 +25,24 @@ const CheckBox = ({
   }
 };
 
+interface ToDoItemProps {
+  handleClick: (id: number) => void;
+  item: ToDoItemData;
+}
+
+const ToDoItem = ({ handleClick, item }: ToDoItemProps) => (
+  <div className={classes.Item} onClick={() => handleClick(item.id)}>
+    <CheckBox
+      onClick={(event) => {
+        handleClick(item.id);
+        event.stopPropagation();
+      }}
+      checked={item.status === ToDoItemStatus.DONE}
+    />
+    <p className={classes.Title}>{item.title}</p>
+    <TrashBin className={[classes.Action, classes.Delete].join(' ')} />
+  </div>
+);
 function App() {
   const [items, setItems] = useState(ToDoItems);
   const handleClick = (id: number) => {
@@ -52,24 +70,8 @@ function App() {
         </div>
       </div>
       <div className={classes.Items}>
-        {items.map((item, i) => (
-          <div
-            className={classes.Item}
-            key={i}
-            onClick={(event) => {
-              handleClick(item.id);
-            }}
-          >
-            <CheckBox
-              onClick={(event) => {
-                handleClick(item.id);
-                event.stopPropagation();
-              }}
-              checked={item.status === ToDoItemStatus.DONE}
-            />
-            <p className={classes.Title}>{item.title}</p>
-            <TrashBin className={[classes.Action, classes.Delete].join(' ')} />
-          </div>
+        {items.map((item) => (
+          <ToDoItem key={item.id} handleClick={handleClick} item={item} />
         ))}
       </div>
       <div className={classes.additionBar}>

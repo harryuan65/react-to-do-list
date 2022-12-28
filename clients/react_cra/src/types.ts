@@ -2,10 +2,10 @@ enum ToDoItemStatus {
   ACTIVE, DONE
 }
 
-interface ToDoItem {
+interface ToDoItemData {
   id: number,
   title: string,
   status: ToDoItemStatus
 }
 
-export {ToDoItemStatus, type ToDoItem}
+export {ToDoItemStatus, type ToDoItemData}

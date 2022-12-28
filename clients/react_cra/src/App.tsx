@@ -31,7 +31,13 @@ interface ToDoItemProps {
 }
 
 const ToDoItem = ({ handleClick, item }: ToDoItemProps) => (
-  <div className={classes.Item} onClick={() => handleClick(item.id)}>
+  <div
+    className={[
+      classes.Item,
+      item.status === ToDoItemStatus.DONE && classes.Done,
+    ].join(' ')}
+    onClick={() => handleClick(item.id)}
+  >
     <CheckBox
       onClick={(event) => {
         handleClick(item.id);

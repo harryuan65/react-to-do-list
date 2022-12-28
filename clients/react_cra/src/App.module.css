@@ -74,10 +74,28 @@
 .Item .Title {
   flex-grow: 1;
   margin-left: 8px;
+  position: relative;
 }
 
+.Item .Title::before {
+  content: '';
+  display: inline-block;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  height: 1px;
+  border-top: 2px solid var(--app-border-color);
+  transform: translateY(-50%);
+  width: 0;
+  transition: width 0.2s ease-in-out;
+}
 .Item.Done {
   color: var(--app-blured-color);
+}
+
+.Item.Done .Title::before {
+  width: 100%;
+  transition: width 0.5s ease-in-out;
 }
 
 .additionBar input,

@@ -73,7 +73,8 @@
 
 .Item .Title {
   flex-grow: 1;
-  margin-left: 8px;
+  margin-left: 14px;
+  margin-right: 14px;
   position: relative;
   padding: 0 8px;
 }
@@ -85,11 +86,12 @@
   left: 0;
   top: 50%;
   height: 1px;
-  border-top: 1px solid var(--app-border-color);
+  border-top: var(--app-border);
   transform: translateY(-50%);
   width: 0;
   transition: width 0.2s ease-in-out;
 }
+
 .Item.Done {
   color: var(--app-blured-color);
 }
@@ -97,6 +99,16 @@
 .Item.Done .Title::before {
   width: 100%;
   transition: width 0.5s ease-in-out;
+}
+
+.Item .Checkbox rect,
+.Item .Checkbox path {
+  stroke: var(--app-text-color);
+}
+
+.Item.Done .Checkbox rect,
+.Item.Done .Checkbox path {
+  stroke: var(--app-blured-color);
 }
 
 .additionBar input,

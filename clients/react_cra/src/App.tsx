@@ -77,6 +77,11 @@ function App() {
           onChange={({ target }) => {
             setNewTitle(target.value);
           }}
+          onKeyDown={(event) => {
+            if (event.key === 'Enter') {
+              addTodo();
+            }
+          }}
           placeholder="Something on your mind?"
           value={newTitle}
         />

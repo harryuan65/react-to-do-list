@@ -45,72 +45,6 @@
   color: var(--app-text-color);
 }
 
-.Item {
-  color: var(--app-text-color);
-  background-color: var(--app-item-bg-color);
-  border: var(--app-border);
-  padding: 12px 16px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  cursor: pointer;
-  opacity: 0;
-  animation: 1s fadein forwards;
-}
-
-@keyframes fadein {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-.Item:hover {
-  background-color: var(--app-item-focused-bg-color);
-}
-
-.Item .Title {
-  flex-grow: 1;
-  margin-left: 14px;
-  margin-right: 14px;
-  position: relative;
-  padding: 0 8px;
-}
-
-.Item .Title::before {
-  content: '';
-  display: inline-block;
-  position: absolute;
-  left: 0;
-  top: 50%;
-  height: 1px;
-  border-top: 1px solid var(--app-blured-color);
-  transform: translateY(-50%);
-  width: 0;
-  transition: width 0.2s ease-in-out;
-}
-
-.Item.Done {
-  color: var(--app-blured-color);
-}
-
-.Item.Done .Title::before {
-  width: 100%;
-  transition: width 0.5s ease-in-out;
-}
-
-.Item .Checkbox rect,
-.Item .Checkbox path {
-  stroke: var(--app-text-color);
-}
-
-.Item.Done .Checkbox rect,
-.Item.Done .Checkbox path {
-  stroke: var(--app-blured-color);
-}
-
 .additionBar input,
 .additionBar button {
   color: var(--app-text-color);
@@ -130,19 +64,4 @@
 
 .additionBar button {
   width: 80px;
-}
-
-.Action {
-  height: 20px;
-  width: 20px;
-  cursor: pointer;
-}
-
-.Checkbox:hover rect,
-.Checkbox:hover path {
-  stroke: var(--app-focused-color);
-}
-
-.Delete:hover path {
-  fill: var(--app-focused-color);
 }

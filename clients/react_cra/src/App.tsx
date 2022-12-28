@@ -3,6 +3,23 @@ import classes from './App.module.css';
 // Local test
 import { ToDoItems } from './constants';
 import { ToDoItemStatus } from './types';
+import { ReactComponent as Checkbox } from './assets/Checkbox__unchecked.svg';
+import { ReactComponent as CheckboxChecked } from './assets/Checkbox__checked.svg';
+import { ReactComponent as TrashBin } from './assets/TrashBin.svg';
+
+const CheckBox = ({ checked }: { checked: boolean }) => {
+  if (checked) {
+    return (
+      <CheckboxChecked
+        className={[classes.Action, classes.Checkbox].join(' ')}
+      />
+    );
+  } else {
+    return (
+      <Checkbox className={[classes.Action, classes.Checkbox].join(' ')} />
+    );
+  }
+};
 
 function App() {
   const [items, setItems] = useState(ToDoItems);
@@ -19,11 +36,9 @@ function App() {
       <div className={classes.Items}>
         {items.map((item, i) => (
           <div className={classes.Item} key={i}>
-            <input
-              type="checkbox"
-              checked={item.status === ToDoItemStatus.DONE}
-            />
-            <span>{item.title}</span>
+            <CheckBox checked={item.status === ToDoItemStatus.DONE} />
+            <p className={classes.Title}>{item.title}</p>
+            <TrashBin className={[classes.Action, classes.Delete].join(' ')} />
           </div>
         ))}
       </div>

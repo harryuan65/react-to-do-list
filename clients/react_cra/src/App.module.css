@@ -2,8 +2,10 @@
   --app-border-color: #555;
   --app-border: 1px solid var(--app-border-color);
   --app-item-bg-color: #2b2b2b;
-  --app-text-color: #ddd;
-  --app-text-color-unfocused: #888;
+  --app-item-focused-bg-color: #3b3b3b;
+  --app-text-color: #ccc;
+  --app-focused-color: #eee;
+  --app-blured-color: #888;
   --app-input-padding: 16px;
 }
 
@@ -47,11 +49,24 @@
   color: var(--app-text-color);
   background-color: var(--app-item-bg-color);
   border: var(--app-border);
-  padding: var(--app-input-padding);
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.Item:hover {
+  background-color: var(--app-item-focused-bg-color);
+}
+
+.Item .Title {
+  flex-grow: 1;
+  margin-left: 8px;
 }
 
 .Item.Done {
-  color: var(--app-text-color-unfocused);
+  color: var(--app-blured-color);
 }
 
 .additionBar input,
@@ -73,4 +88,19 @@
 
 .additionBar button {
   width: 80px;
+}
+
+.Action {
+  height: 20px;
+  width: 20px;
+  cursor: pointer;
+}
+
+.Checkbox:hover rect,
+.Checkbox:hover path {
+  stroke: var(--app-focused-color);
+}
+
+.Delete:hover path {
+  fill: var(--app-focused-color);
 }

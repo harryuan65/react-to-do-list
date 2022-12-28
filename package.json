@@ -1,0 +1,10 @@
+{
+  "name": "to_do_list",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "harryuan65 <harryuan.65@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "react_cra": "yarn --cwd clients/react_cra start"
+  }
+}

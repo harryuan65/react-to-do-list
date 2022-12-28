@@ -10,6 +10,7 @@ interface ToDoItemProps {
   toggleEdit: (id: number) => void;
   handleEdit: (value: string, id: number) => void;
   handleClick: (id: number) => void;
+  handleDelete: (id: number) => void;
   item: ToDoItemState;
 }
 
@@ -35,6 +36,7 @@ const ToDoItem = ({
   toggleEdit,
   handleEdit,
   handleClick,
+  handleDelete,
   item,
 }: ToDoItemProps) => {
   const onClick = (event: React.MouseEvent) => {
@@ -49,6 +51,10 @@ const ToDoItem = ({
   const onEdit = (event: React.ChangeEvent) => {
     const target = event.target as HTMLInputElement;
     handleEdit(target.value, item.id);
+    event.stopPropagation();
+  };
+  const onDelete = (event: React.MouseEvent) => {
+    handleDelete(item.id);
     event.stopPropagation();
   };
   const content = item.editing ? (
@@ -80,7 +86,10 @@ const ToDoItem = ({
         onClick={onToggleEdit}
         className={[classes.Action, classes.Edit].join(' ')}
       />
-      <TrashBinSVG className={[classes.Action, classes.Delete].join(' ')} />
+      <TrashBinSVG
+        onClick={onDelete}
+        className={[classes.Action, classes.Delete].join(' ')}
+      />
     </div>
   );
 };

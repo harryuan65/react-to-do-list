@@ -50,6 +50,9 @@ function App() {
       })
     );
   };
+  const handleDelete = (id: number) => {
+    setItems(items.filter((item) => item.id !== id));
+  };
   return (
     <div className={classes.Container}>
       <div className={classes.filterBar}>
@@ -67,6 +70,7 @@ function App() {
             toggleEdit={toggleEdit}
             handleEdit={handleEdit}
             handleClick={handleClick}
+            handleDelete={handleDelete}
             item={item}
           />
         ))}

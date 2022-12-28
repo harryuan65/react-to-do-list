@@ -3,9 +3,9 @@
   --app-border: 1px solid var(--app-border-color);
   --app-item-bg-color: #2b2b2b;
   --app-item-focused-bg-color: #3b3b3b;
-  --app-text-color: #ccc;
-  --app-focused-color: #eee;
-  --app-blured-color: #888;
+  --app-text-color: #efefef;
+  --app-focused-color: #fefefe;
+  --app-blured-color: #999;
   --app-input-padding: 16px;
 }
 
@@ -75,6 +75,7 @@
   flex-grow: 1;
   margin-left: 8px;
   position: relative;
+  padding: 0 8px;
 }
 
 .Item .Title::before {
@@ -84,7 +85,7 @@
   left: 0;
   top: 50%;
   height: 1px;
-  border-top: 2px solid var(--app-border-color);
+  border-top: 1px solid var(--app-border-color);
   transform: translateY(-50%);
   width: 0;
   transition: width 0.2s ease-in-out;

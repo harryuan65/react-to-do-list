@@ -44,7 +44,17 @@ const ToDoItem = ({ handleClick, item }: ToDoItemProps) => (
   </div>
 );
 function App() {
-  const [items, setItems] = useState(ToDoItems);
+  const [newTitle, setNewTitle] = useState<string>('');
+  const [items, setItems] = useState<ToDoItemData[]>(ToDoItems);
+
+  const addTodo = () => {
+    setItems([
+      ...items,
+      { id: items.length + 1, title: newTitle, status: ToDoItemStatus.ACTIVE },
+    ]);
+    setNewTitle('');
+  };
+
   const handleClick = (id: number) => {
     setItems(
       items.map((item) => {
@@ -75,8 +85,15 @@ function App() {
         ))}
       </div>
       <div className={classes.additionBar}>
-        <input type="text" placeholder="Something on your mind?" />
-        <button>ADD</button>
+        <input
+          type="text"
+          onChange={({ target }) => {
+            setNewTitle(target.value);
+          }}
+          placeholder="Something on your mind?"
+          value={newTitle}
+        />
+        <button onClick={addTodo}>ADD</button>
       </div>
     </div>
   );

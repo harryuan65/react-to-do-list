@@ -1,0 +1,76 @@
+:root {
+  --app-border-color: #555;
+  --app-border: 1px solid var(--app-border-color);
+  --app-item-bg-color: #2b2b2b;
+  --app-text-color: #ddd;
+  --app-text-color-unfocused: #888;
+  --app-input-padding: 16px;
+}
+
+.Container {
+  min-width: 50vw;
+  display: flex;
+  flex-direction: column;
+  row-gap: 30px;
+  color: var(--app-text-color);
+  font-size: 14px;
+}
+
+.filterBar {
+  display: flex;
+  justify-content: space-between;
+}
+
+.filterBar input {
+  min-width: 55%;
+  padding: var(--app-input-padding);
+  background-color: var(--app-item-bg-color);
+  border: var(--app-border);
+  color: var(--app-text-color);
+}
+
+.statuses span {
+  display: inline-block;
+  width: 40px;
+  background-color: var(--app-item-bg-color);
+  border: var(--app-border);
+  padding: var(--app-input-padding);
+  text-align: center;
+  cursor: pointer;
+}
+
+.statuses span.active {
+  color: var(--app-text-color);
+}
+
+.Item {
+  color: var(--app-text-color);
+  background-color: var(--app-item-bg-color);
+  border: var(--app-border);
+  padding: var(--app-input-padding);
+}
+
+.Item.Done {
+  color: var(--app-text-color-unfocused);
+}
+
+.additionBar input,
+.additionBar button {
+  color: var(--app-text-color);
+  background-color: var(--app-item-bg-color);
+  border: var(--app-border);
+  padding: var(--app-input-padding);
+}
+
+.additionBar {
+  display: flex;
+  justify-content: space-between;
+}
+
+.additionBar input {
+  width: 70%;
+}
+
+.additionBar button {
+  width: 80px;
+}

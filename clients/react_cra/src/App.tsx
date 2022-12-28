@@ -7,22 +7,40 @@ import { ReactComponent as Checkbox } from './assets/Checkbox__unchecked.svg';
 import { ReactComponent as CheckboxChecked } from './assets/Checkbox__checked.svg';
 import { ReactComponent as TrashBin } from './assets/TrashBin.svg';
 
-const CheckBox = ({ checked }: { checked: boolean }) => {
+const CheckBox = ({
+  checked,
+  onClick,
+}: {
+  checked: boolean;
+  onClick: React.MouseEventHandler;
+}) => {
+  let props = {
+    onClick,
+    className: [classes.Action, classes.Checkbox].join(' '),
+  };
   if (checked) {
-    return (
-      <CheckboxChecked
-        className={[classes.Action, classes.Checkbox].join(' ')}
-      />
-    );
+    return <CheckboxChecked {...props} />;
   } else {
-    return (
-      <Checkbox className={[classes.Action, classes.Checkbox].join(' ')} />
-    );
+    return <Checkbox {...props} />;
   }
 };
 
 function App() {
   const [items, setItems] = useState(ToDoItems);
+  const handleClick = (id: number) => {
+    setItems(
+      items.map((item) => {
+        if (item.id === id) {
+          if (item.status === ToDoItemStatus.ACTIVE) {
+            item.status = ToDoItemStatus.DONE;
+          } else {
+            item.status = ToDoItemStatus.ACTIVE;
+          }
+        }
+        return item;
+      })
+    );
+  };
   return (
     <div className={classes.Container}>
       <div className={classes.filterBar}>
@@ -35,8 +53,20 @@ function App() {
       </div>
       <div className={classes.Items}>
         {items.map((item, i) => (
-          <div className={classes.Item} key={i}>
-            <CheckBox checked={item.status === ToDoItemStatus.DONE} />
+          <div
+            className={classes.Item}
+            key={i}
+            onClick={(event) => {
+              handleClick(item.id);
+            }}
+          >
+            <CheckBox
+              onClick={(event) => {
+                handleClick(item.id);
+                event.stopPropagation();
+              }}
+              checked={item.status === ToDoItemStatus.DONE}
+            />
             <p className={classes.Title}>{item.title}</p>
             <TrashBin className={[classes.Action, classes.Delete].join(' ')} />
           </div>

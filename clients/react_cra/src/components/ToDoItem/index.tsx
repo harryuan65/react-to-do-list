@@ -1,10 +1,9 @@
 import React from 'react';
 import { ToDoItemState, ToDoItemStatus } from '../../types';
-import { ReactComponent as CheckboxSVG } from '../../assets/Checkbox__unchecked.svg';
-import { ReactComponent as CheckboxCheckedSVG } from '../../assets/Checkbox__checked.svg';
 import { ReactComponent as TrashBinSVG } from '../../assets/TrashBin.svg';
 import { ReactComponent as EditSVG } from '../../assets/Edit.svg';
 import styles from './styles.module.css';
+import Checkbox from '../Checkbox';
 
 interface ToDoItemProps {
   toggleEdit: (id: number) => void;
@@ -13,24 +12,6 @@ interface ToDoItemProps {
   handleDelete: (id: number) => void;
   item: ToDoItemState;
 }
-
-interface CheckBoxProps {
-  checked: boolean,
-  onClick: React.MouseEventHandler
-}
-
-const CheckBox = ({ checked, onClick }: CheckBoxProps) => {
-  const props = {
-    onClick,
-    className: [styles.action, styles.checkbox].join(' '),
-  };
-
-  if (checked) {
-    return <CheckboxCheckedSVG {...props} />;
-  } else {
-    return <CheckboxSVG {...props} />;
-  }
-};
 
 const ToDoItem = ({
   toggleEdit,
@@ -82,7 +63,7 @@ const ToDoItem = ({
       ].join(' ')}
       onClick={() => handleClick(item.id)}
     >
-      <CheckBox
+      <Checkbox
         onClick={onClick}
         checked={item.status === ToDoItemStatus.DONE}
       />

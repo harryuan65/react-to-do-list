@@ -11,6 +11,8 @@ function App () {
   const [filterStatus, setFilterStatus] = useState<ToDoItemStatus| null>(null);
 
   const addTodo = () => {
+    if (!newTitle) return;
+
     setItems([
       ...items,
       { id: items.length + 1, title: newTitle, status: ToDoItemStatus.ACTIVE },
@@ -99,7 +101,7 @@ function App () {
           onChange={({ target }) => {
             setNewTitle(target.value);
           }}
-          onKeyDown={(event) => {
+          onKeyUp={(event) => {
             if (event.key === 'Enter') {
               addTodo();
             }
@@ -107,7 +109,7 @@ function App () {
           placeholder="Add a Task..."
           value={newTitle}
         />
-        <button onClick={addTodo}>ADD</button>
+        <button className={classes.add} onClick={addTodo}>ADD</button>
       </div>
     </div>
   );

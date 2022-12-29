@@ -70,6 +70,11 @@
   width: 80px;
 }
 
+.add:hover {
+  opacity: 0.7;
+  cursor: pointer;
+}
+
 .filterStatus {
   color: var(--app-blured-color);
 }

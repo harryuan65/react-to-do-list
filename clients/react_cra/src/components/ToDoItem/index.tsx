@@ -14,16 +14,15 @@ interface ToDoItemProps {
   item: ToDoItemState;
 }
 
-const CheckBox = ({
-  checked,
-  onClick,
-}: {
-  checked: boolean;
-  onClick: React.MouseEventHandler;
-}) => {
+interface CheckBoxProps {
+  checked: boolean,
+  onClick: React.MouseEventHandler
+}
+
+const CheckBox = ({ checked, onClick }: CheckBoxProps) => {
   const props = {
     onClick,
-    className: [classes.Action, classes.Checkbox,].join(' '),
+    className: [classes.Action, classes.Checkbox].join(' '),
   };
 
   if (checked) {
@@ -90,11 +89,11 @@ const ToDoItem = ({
       {content}
       <EditSVG
         onClick={onToggleEdit}
-        className={[classes.Action, classes.Edit,].join(' ')}
+        className={[classes.Action, classes.Edit].join(' ')}
       />
       <TrashBinSVG
         onClick={onDelete}
-        className={[classes.Action, classes.Delete,].join(' ')}
+        className={[classes.Action, classes.Delete].join(' ')}
       />
     </div>
   );

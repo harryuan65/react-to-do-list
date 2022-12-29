@@ -72,4 +72,5 @@
 
 .filterStatus.active {
   color: var(--app-focused-color);
+  font-weight: bold;
 }

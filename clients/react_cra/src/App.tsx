@@ -7,6 +7,7 @@ import { ToDoItemState, ToDoItemStatus } from './types';
 function App () {
   const [newTitle, setNewTitle] = useState<string>('');
   const [items, setItems] = useState<ToDoItemState[]>(ToDoItems);
+  const [filterStatus, setFilterStatus] = useState<ToDoItemStatus| null>(null);
 
   const addTodo = () => {
     setItems([
@@ -56,18 +57,25 @@ function App () {
   const handleDelete = (id: number) => {
     setItems(items.filter((item) => item.id !== id));
   };
+
+  const handleSetFilter = (status: ToDoItemStatus | null) => {
+    setFilterStatus(status);
+  };
+
+  const displayItems = filterStatus ? items.filter(item => item.status === filterStatus) : items;
+
   return (
     <div className={classes.Container}>
       <div className={classes.filterBar}>
         <input type="text" className={classes.Search} />
         <div className={classes.statuses}>
-          <span className={classes.All}>All</span>
-          <span className={classes.Active}>Active</span>
-          <span className={classes.Done}>Done</span>
+          <span onClick={() => handleSetFilter(null)} className={[filterStatus === null && classes.active, classes.filterStatus].join(' ')}>All</span>
+          <span onClick={() => handleSetFilter(ToDoItemStatus.ACTIVE)} className={[filterStatus === ToDoItemStatus.ACTIVE && classes.active, classes.filterStatus].join(' ')}>Active</span>
+          <span onClick={() => handleSetFilter(ToDoItemStatus.DONE)} className={[filterStatus === ToDoItemStatus.DONE && classes.active, classes.filterStatus].join(' ')}>Done</span>
         </div>
       </div>
       <div className={classes.Items}>
-        {items.map((item) => (
+        {displayItems.map((item) => (
           <ToDoItem
             key={item.id}
             toggleEdit={toggleEdit}

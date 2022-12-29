@@ -65,3 +65,11 @@
 .additionBar button {
   width: 80px;
 }
+
+.filterStatus {
+  color: var(--app-blured-color);
+}
+
+.filterStatus.active {
+  color: var(--app-focused-color);
+}

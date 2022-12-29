@@ -32,7 +32,8 @@
                 "objects": "only-multiline"
             }
         ],
-        "indent": [
+        "indent": "off",
+        "@typescript-eslint/indent": [
             "error",
             2
         ]

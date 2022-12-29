@@ -21,10 +21,11 @@ const CheckBox = ({
   checked: boolean;
   onClick: React.MouseEventHandler;
 }) => {
-  let props = {
+  const props = {
     onClick,
-    className: [classes.Action, classes.Checkbox].join(' '),
+    className: [classes.Action, classes.Checkbox,].join(' '),
   };
+
   if (checked) {
     return <CheckboxCheckedSVG {...props} />;
   } else {
@@ -48,16 +49,20 @@ const ToDoItem = ({
     toggleEdit(item.id);
     event.stopPropagation();
   };
+
   const onEdit = (event: React.ChangeEvent) => {
     const target = event.target as HTMLInputElement;
     handleEdit(target.value, item.id);
     event.stopPropagation();
   };
+
   const onDelete = (event: React.MouseEvent) => {
     handleDelete(item.id);
     event.stopPropagation();
   };
-  const content = item.editing ? (
+
+  const content = item.editing
+    ? (
     <input
       onClick={(event) => event.stopPropagation()}
       onChange={onEdit}
@@ -65,9 +70,10 @@ const ToDoItem = ({
       type="text"
       value={item.title}
     />
-  ) : (
+      )
+    : (
     <p className={classes.Title}>{item.title}</p>
-  );
+      );
 
   return (
     <div
@@ -84,11 +90,11 @@ const ToDoItem = ({
       {content}
       <EditSVG
         onClick={onToggleEdit}
-        className={[classes.Action, classes.Edit].join(' ')}
+        className={[classes.Action, classes.Edit,].join(' ')}
       />
       <TrashBinSVG
         onClick={onDelete}
-        className={[classes.Action, classes.Delete].join(' ')}
+        className={[classes.Action, classes.Delete,].join(' ')}
       />
     </div>
   );

@@ -87,9 +87,15 @@ function App () {
           <span onClick={() => handleSetFilter(ToDoItemStatus.DONE)} className={statusClassesFor(ToDoItemStatus.DONE)}>Done</span>
         </div>
       </div>
-      {(filteredItems.length === 0
-        ? <h2 className={classes.emptyMessage}>Oh! Looks like there is nothing to do.</h2>
-        : <ToDoItems items={filteredItems} toggleEdit={toggleEdit} handleEdit={handleEdit} handleClick={handleClick} handleDelete={handleDelete}/>)}
+      {
+        (filteredItems.length === 0
+          ? <h2 className={classes.emptyMessage}>Oh! Looks like there is nothing to do.</h2>
+          : <ToDoItems items={filteredItems}
+            toggleEdit={toggleEdit}
+            handleEdit={handleEdit}
+            handleClick={handleClick}
+            handleDelete={handleDelete}/>)
+      }
       <div className={classes.additionBar}>
         <input
           type="text"

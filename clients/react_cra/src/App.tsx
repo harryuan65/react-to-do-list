@@ -65,16 +65,16 @@ function App () {
   const displayItems = filterStatus ? items.filter(item => item.status === filterStatus) : items;
 
   return (
-    <div className={classes.Container}>
+    <div className={classes.container}>
       <div className={classes.filterBar}>
-        <input type="text" className={classes.Search} />
+        <input type="text" className={classes.search} />
         <div className={classes.statuses}>
           <span onClick={() => handleSetFilter(null)} className={[filterStatus === null && classes.active, classes.filterStatus].join(' ')}>All</span>
           <span onClick={() => handleSetFilter(ToDoItemStatus.ACTIVE)} className={[filterStatus === ToDoItemStatus.ACTIVE && classes.active, classes.filterStatus].join(' ')}>Active</span>
           <span onClick={() => handleSetFilter(ToDoItemStatus.DONE)} className={[filterStatus === ToDoItemStatus.DONE && classes.active, classes.filterStatus].join(' ')}>Done</span>
         </div>
       </div>
-      <div className={classes.Items}>
+      <div className={classes.items}>
         {displayItems.map((item) => (
           <ToDoItem
             key={item.id}

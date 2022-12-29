@@ -5,6 +5,6 @@
   "author": "harryuan65 <harryuan.65@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "react_cra": "yarn --cwd clients/react_cra start"
+    "react_cra": "yarn --cwd frontends/react_cra start"
   }
 }

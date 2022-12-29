@@ -1,5 +1,6 @@
 import React from 'react';
 import { ToDoItemState, ToDoItemStatus } from '../../types';
+import { ReactComponent as CheckSVG } from '../../assets/Check.svg';
 import { ReactComponent as TrashBinSVG } from '../../assets/TrashBin.svg';
 import { ReactComponent as EditSVG } from '../../assets/Edit.svg';
 import styles from './styles.module.css';
@@ -41,6 +42,13 @@ const ToDoItem = ({
     event.stopPropagation();
   };
 
+  const editProps = {
+    onClick: onToggleEdit,
+    className: [styles.action, styles.edit].join(' ')
+  };
+  const EditButton = item.editing
+    ? <CheckSVG {...editProps}/>
+    : <EditSVG {...editProps}/>;
   const content = item.editing
     ? (
     <input
@@ -68,10 +76,7 @@ const ToDoItem = ({
         checked={item.status === ToDoItemStatus.DONE}
       />
       {content}
-      <EditSVG
-        onClick={onToggleEdit}
-        className={[styles.action, styles.edit].join(' ')}
-      />
+      {EditButton}
       <TrashBinSVG
         onClick={onDelete}
         className={[styles.action, styles.delete].join(' ')}

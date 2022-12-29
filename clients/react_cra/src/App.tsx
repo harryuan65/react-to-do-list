@@ -104,7 +104,7 @@ function App () {
               addTodo();
             }
           }}
-          placeholder="Something on your mind?"
+          placeholder="Add a Task..."
           value={newTitle}
         />
         <button onClick={addTodo}>ADD</button>

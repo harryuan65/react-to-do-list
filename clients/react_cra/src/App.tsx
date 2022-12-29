@@ -7,6 +7,7 @@ import { ToDoItemState, ToDoItemStatus } from './types';
 function App () {
   const [newTitle, setNewTitle] = useState<string>('');
   const [items, setItems] = useState<ToDoItemState[]>(ToDoItems);
+  const [searchTerm, setSearchTerm] = useState<string>('');
   const [filterStatus, setFilterStatus] = useState<ToDoItemStatus| null>(null);
 
   const addTodo = () => {
@@ -62,12 +63,18 @@ function App () {
     setFilterStatus(status);
   };
 
-  const displayItems = filterStatus ? items.filter(item => item.status === filterStatus) : items;
+  const handleSearch = (value: string) => {
+    setSearchTerm(value);
+  };
+
+  let displayItems = items;
+  displayItems = filterStatus ? items.filter(item => item.status === filterStatus) : items;
+  displayItems = searchTerm ? items.filter(item => item.title.match(new RegExp(searchTerm, 'gi'))) : displayItems;
 
   return (
     <div className={classes.container}>
       <div className={classes.filterBar}>
-        <input type="text" className={classes.search} />
+        <input placeholder="Search something..." type="text" value={searchTerm} onChange={(event) => { handleSearch(event.target.value); }} className={classes.search} />
         <div className={classes.statuses}>
           <span onClick={() => handleSetFilter(null)} className={[filterStatus === null && classes.active, classes.filterStatus].join(' ')}>All</span>
           <span onClick={() => handleSetFilter(ToDoItemStatus.ACTIVE)} className={[filterStatus === ToDoItemStatus.ACTIVE && classes.active, classes.filterStatus].join(' ')}>Active</span>

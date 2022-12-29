@@ -27,8 +27,8 @@
         "comma-dangle": [
             "error",
             {
-                "arrays": "always",
-                "objects": "always"
+                "arrays": "only-multiline",
+                "objects": "only-multiline"
             }
         ]
     }

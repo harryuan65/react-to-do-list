@@ -11,6 +11,7 @@ function App () {
   const [filterStatus, setFilterStatus] = useState<ToDoItemStatus| null>(null);
 
   const addTodo = () => {
+    // Prevent creating empty to-dos
     if (!newTitle) return;
 
     setItems([
@@ -73,6 +74,7 @@ function App () {
   filteredItems = filterStatus ? items.filter(item => item.status === filterStatus) : items;
   filteredItems = searchTerm ? items.filter(item => item.title.match(new RegExp(searchTerm, 'gi'))) : filteredItems;
 
+  // Add active class to span when current filter status matches with it
   const statusClassesFor = (targetStatus: ToDoItemStatus | null) => {
     return [filterStatus === targetStatus && classes.active, classes.filterStatus].join(' ');
   };

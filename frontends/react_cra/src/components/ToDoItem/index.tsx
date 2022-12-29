@@ -66,12 +66,13 @@ const ToDoItem = ({
     <p className={styles.title}>{item.title}</p>
       );
 
+  const itemClasses = [
+    styles.item,
+    item.status === ToDoItemStatus.DONE && styles.done,
+  ].join(' ');
   return (
     <div
-      className={[
-        styles.item,
-        item.status === ToDoItemStatus.DONE && styles.done,
-      ].join(' ')}
+      className={itemClasses}
       onClick={() => handleClick(item.id)}
     >
       <Checkbox

@@ -1,18 +1,18 @@
-import { ToDoItemData, ToDoItemStatus } from "./types"
+import { ToDoItemData, ToDoItemStatus } from './types';
 export const ToDoItems: ToDoItemData[] = [
   {
     id: 1,
-    title: "Do leetcode questions",
+    title: 'Do leetcode questions',
     status: ToDoItemStatus.ACTIVE
   },
   {
     id: 2,
-    title: "Work out",
+    title: 'Work out',
     status: ToDoItemStatus.DONE
   },
   {
     id: 3,
-    title: "Review systems design knowledge",
+    title: 'Review systems design knowledge',
     status: ToDoItemStatus.ACTIVE
   },
-]
+];

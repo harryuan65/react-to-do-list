@@ -14,4 +14,4 @@ interface ToDoItemState extends ToDoItemData {
   editing?: boolean;
 }
 
-export {ToDoItemStatus, type ToDoItemData, type ToDoItemState}
+export { ToDoItemStatus, type ToDoItemData, type ToDoItemState };

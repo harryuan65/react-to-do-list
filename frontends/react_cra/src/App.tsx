@@ -73,14 +73,18 @@ function App () {
   filteredItems = filterStatus ? items.filter(item => item.status === filterStatus) : items;
   filteredItems = searchTerm ? items.filter(item => item.title.match(new RegExp(searchTerm, 'gi'))) : filteredItems;
 
+  const statusClassesFor = (targetStatus: ToDoItemStatus | null) => {
+    return [filterStatus === targetStatus && classes.active, classes.filterStatus].join(' ');
+  };
+
   return (
     <div className={classes.container}>
       <div className={classes.filterBar}>
         <input placeholder="Search something..." type="text" value={searchTerm} onChange={(event) => { handleSearch(event.target.value); }} className={classes.search} />
         <div className={classes.statuses}>
-          <span onClick={() => handleSetFilter(null)} className={[filterStatus === null && classes.active, classes.filterStatus].join(' ')}>All</span>
-          <span onClick={() => handleSetFilter(ToDoItemStatus.ACTIVE)} className={[filterStatus === ToDoItemStatus.ACTIVE && classes.active, classes.filterStatus].join(' ')}>Active</span>
-          <span onClick={() => handleSetFilter(ToDoItemStatus.DONE)} className={[filterStatus === ToDoItemStatus.DONE && classes.active, classes.filterStatus].join(' ')}>Done</span>
+          <span onClick={() => handleSetFilter(null)} className={statusClassesFor(null)}>All</span>
+          <span onClick={() => handleSetFilter(ToDoItemStatus.ACTIVE)} className={statusClassesFor(ToDoItemStatus.ACTIVE)}>Active</span>
+          <span onClick={() => handleSetFilter(ToDoItemStatus.DONE)} className={statusClassesFor(ToDoItemStatus.DONE)}>Done</span>
         </div>
       </div>
       {(filteredItems.length === 0

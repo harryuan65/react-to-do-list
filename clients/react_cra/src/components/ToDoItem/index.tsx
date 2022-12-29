@@ -46,14 +46,17 @@ const ToDoItem = ({
     onClick: onToggleEdit,
     className: [styles.action, styles.edit].join(' ')
   };
+
   const EditButton = item.editing
     ? <CheckSVG {...editProps}/>
     : <EditSVG {...editProps}/>;
+
   const content = item.editing
     ? (
     <input
       onClick={(event) => event.stopPropagation()}
       onChange={onEdit}
+      onKeyDown={(event) => { event.key === 'Enter' && toggleEdit(item.id); }}
       className={styles.title}
       type="text"
       value={item.title}

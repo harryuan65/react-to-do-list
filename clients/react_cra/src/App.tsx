@@ -4,7 +4,7 @@ import ToDoItem from './components/ToDoItem';
 import { ToDoItems } from './constants';
 import { ToDoItemState, ToDoItemStatus } from './types';
 
-function App() {
+function App () {
   const [newTitle, setNewTitle] = useState<string>('');
   const [items, setItems] = useState<ToDoItemState[]>(ToDoItems);
 
@@ -26,6 +26,7 @@ function App() {
       })
     );
   };
+
   const handleEdit = (value: string, id: number) => {
     setItems(
       items.map((item) => {
@@ -36,6 +37,7 @@ function App() {
       })
     );
   };
+
   const handleClick = (id: number) => {
     setItems(
       items.map((item) => {
@@ -50,6 +52,7 @@ function App() {
       })
     );
   };
+
   const handleDelete = (id: number) => {
     setItems(items.filter((item) => item.id !== id));
   };

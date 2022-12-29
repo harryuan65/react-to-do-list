@@ -63,16 +63,6 @@
   border: none;
 }
 
-.item .checkbox rect,
-.item .checkbox path {
-  stroke: var(--app-text-color);
-}
-
-.item.done .checkbox rect,
-.item.done .checkbox path {
-  stroke: var(--app-blured-color);
-}
-
 .action {
   height: 20px;
   width: 20px;

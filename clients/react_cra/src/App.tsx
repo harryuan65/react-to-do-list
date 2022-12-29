@@ -69,9 +69,21 @@ function App () {
     setSearchTerm(value);
   };
 
-  let displayItems = items;
-  displayItems = filterStatus ? items.filter(item => item.status === filterStatus) : items;
-  displayItems = searchTerm ? items.filter(item => item.title.match(new RegExp(searchTerm, 'gi'))) : displayItems;
+  const displayItems = (someItems: ToDoItemState[]) => (
+    someItems.map((item) => (
+      <ToDoItem
+        key={item.id}
+        toggleEdit={toggleEdit}
+        handleEdit={handleEdit}
+        handleClick={handleClick}
+        handleDelete={handleDelete}
+        item={item}
+      />
+    ))
+  );
+  let filteredItems: ToDoItemState[] = items;
+  filteredItems = filterStatus ? items.filter(item => item.status === filterStatus) : items;
+  filteredItems = searchTerm ? items.filter(item => item.title.match(new RegExp(searchTerm, 'gi'))) : filteredItems;
 
   return (
     <div className={classes.container}>
@@ -84,16 +96,7 @@ function App () {
         </div>
       </div>
       <div className={classes.items}>
-        {displayItems.map((item) => (
-          <ToDoItem
-            key={item.id}
-            toggleEdit={toggleEdit}
-            handleEdit={handleEdit}
-            handleClick={handleClick}
-            handleDelete={handleDelete}
-            item={item}
-          />
-        ))}
+        {filteredItems.length === 0 ? <h2 className={classes.emptyMessage}>Oh! Looks like there is nothing to do.</h2> : displayItems(filteredItems)}
       </div>
       <div className={classes.additionBar}>
         <input

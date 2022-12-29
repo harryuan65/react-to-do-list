@@ -45,6 +45,15 @@
   color: var(--app-text-color);
 }
 
+.emptyMessage {
+  color: var(--app-blured-color);
+  font-weight: normal;
+}
+
+.emptyMessage::before {
+  content: '> ';
+}
+
 .items {
   min-height: 212px;
 }

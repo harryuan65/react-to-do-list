@@ -40,8 +40,9 @@ const ToDoItem = ({
 
   const onEnterKey = (event: React.KeyboardEvent) => event.key === 'Enter' && toggleEdit(item.id);
 
-  const onTrashBinClick = () => {
+  const onTrashBinClick = (event: React.MouseEvent) => {
     handleDelete(item.id);
+    event.stopPropagation();
   };
 
   const editProps = {

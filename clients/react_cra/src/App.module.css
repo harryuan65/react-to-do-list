@@ -45,6 +45,10 @@
   color: var(--app-text-color);
 }
 
+.items {
+  min-height: 212px;
+}
+
 .additionBar input,
 .additionBar button {
   color: var(--app-text-color);

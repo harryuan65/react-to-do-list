@@ -31,6 +31,10 @@
                 "arrays": "only-multiline",
                 "objects": "only-multiline"
             }
+        ],
+        "indent": [
+            "error",
+            2
         ]
     }
 }

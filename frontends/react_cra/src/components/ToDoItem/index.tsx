@@ -53,23 +53,24 @@ const ToDoItem = ({
 
   const content = item.editing
     ? (
-    <input
-      onClick={(event) => event.stopPropagation()}
-      onChange={onEdit}
-      onKeyDown={(event) => { event.key === 'Enter' && toggleEdit(item.id); }}
-      className={styles.title}
-      type="text"
-      value={item.title}
-    />
-      )
+      <input
+        onClick={(event) => event.stopPropagation()}
+        onChange={onEdit}
+        onKeyDown={(event) => { event.key === 'Enter' && toggleEdit(item.id); }}
+        className={styles.title}
+        type="text"
+        value={item.title}
+      />
+    )
     : (
-    <p className={styles.title}>{item.title}</p>
-      );
+      <p className={styles.title}>{item.title}</p>
+    );
 
   const itemClasses = [
     styles.item,
     item.status === ToDoItemStatus.DONE && styles.done,
   ].join(' ');
+
   return (
     <div
       className={itemClasses}

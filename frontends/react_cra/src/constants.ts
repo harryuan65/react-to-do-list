@@ -1,5 +1,5 @@
 import { ToDoItemData, ToDoItemStatus } from './types';
-export const ToDoItems: ToDoItemData[] = [
+export const DummyToDoItems: ToDoItemData[] = [
   {
     id: 1,
     title: 'Do leetcode questions',

@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import classes from './App.module.css';
-import ToDoItem from './components/ToDoItem';
-import { ToDoItems } from './constants';
+import ToDoItems from './components/ToDoItems';
+import { DummyToDoItems } from './constants';
 import { ToDoItemState, ToDoItemStatus } from './types';
 
 function App () {
   const [newTitle, setNewTitle] = useState<string>('');
-  const [items, setItems] = useState<ToDoItemState[]>(ToDoItems);
+  const [items, setItems] = useState<ToDoItemState[]>(DummyToDoItems);
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [filterStatus, setFilterStatus] = useState<ToDoItemStatus| null>(null);
 
@@ -69,18 +69,6 @@ function App () {
     setSearchTerm(value);
   };
 
-  const displayItems = (someItems: ToDoItemState[]) => (
-    someItems.map((item) => (
-      <ToDoItem
-        key={item.id}
-        toggleEdit={toggleEdit}
-        handleEdit={handleEdit}
-        handleClick={handleClick}
-        handleDelete={handleDelete}
-        item={item}
-      />
-    ))
-  );
   let filteredItems: ToDoItemState[] = items;
   filteredItems = filterStatus ? items.filter(item => item.status === filterStatus) : items;
   filteredItems = searchTerm ? items.filter(item => item.title.match(new RegExp(searchTerm, 'gi'))) : filteredItems;
@@ -95,9 +83,9 @@ function App () {
           <span onClick={() => handleSetFilter(ToDoItemStatus.DONE)} className={[filterStatus === ToDoItemStatus.DONE && classes.active, classes.filterStatus].join(' ')}>Done</span>
         </div>
       </div>
-      <div className={classes.items}>
-        {filteredItems.length === 0 ? <h2 className={classes.emptyMessage}>Oh! Looks like there is nothing to do.</h2> : displayItems(filteredItems)}
-      </div>
+        {(filteredItems.length === 0
+          ? <h2 className={classes.emptyMessage}>Oh! Looks like there is nothing to do.</h2>
+          : <ToDoItems items={filteredItems} toggleEdit={toggleEdit} handleEdit={handleEdit} handleClick={handleClick} handleDelete={handleDelete}/>)}
       <div className={classes.additionBar}>
         <input
           type="text"

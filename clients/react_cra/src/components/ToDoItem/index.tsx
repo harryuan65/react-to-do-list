@@ -4,7 +4,7 @@ import { ReactComponent as CheckboxSVG } from '../../assets/Checkbox__unchecked.
 import { ReactComponent as CheckboxCheckedSVG } from '../../assets/Checkbox__checked.svg';
 import { ReactComponent as TrashBinSVG } from '../../assets/TrashBin.svg';
 import { ReactComponent as EditSVG } from '../../assets/Edit.svg';
-import classes from './style.module.css';
+import styles from './styles.module.css';
 
 interface ToDoItemProps {
   toggleEdit: (id: number) => void;
@@ -22,7 +22,7 @@ interface CheckBoxProps {
 const CheckBox = ({ checked, onClick }: CheckBoxProps) => {
   const props = {
     onClick,
-    className: [classes.Action, classes.Checkbox].join(' '),
+    className: [styles.action, styles.checkbox].join(' '),
   };
 
   if (checked) {
@@ -65,20 +65,20 @@ const ToDoItem = ({
     <input
       onClick={(event) => event.stopPropagation()}
       onChange={onEdit}
-      className={classes.Title}
+      className={styles.title}
       type="text"
       value={item.title}
     />
       )
     : (
-    <p className={classes.Title}>{item.title}</p>
+    <p className={styles.title}>{item.title}</p>
       );
 
   return (
     <div
       className={[
-        classes.Item,
-        item.status === ToDoItemStatus.DONE && classes.Done,
+        styles.item,
+        item.status === ToDoItemStatus.DONE && styles.done,
       ].join(' ')}
       onClick={() => handleClick(item.id)}
     >
@@ -89,11 +89,11 @@ const ToDoItem = ({
       {content}
       <EditSVG
         onClick={onToggleEdit}
-        className={[classes.Action, classes.Edit].join(' ')}
+        className={[styles.action, styles.edit].join(' ')}
       />
       <TrashBinSVG
         onClick={onDelete}
-        className={[classes.Action, classes.Delete].join(' ')}
+        className={[styles.action, styles.delete].join(' ')}
       />
     </div>
   );

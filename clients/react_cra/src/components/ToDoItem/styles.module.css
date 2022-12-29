@@ -1,4 +1,4 @@
-.Item {
+.item {
   color: var(--app-text-color);
   background-color: var(--app-item-bg-color);
   border: var(--app-border);
@@ -20,11 +20,11 @@
   }
 }
 
-.Item:hover {
+.item:hover {
   background-color: var(--app-item-focused-bg-color);
 }
 
-.Item .Title {
+.item .title {
   flex-grow: 1;
   margin-left: 14px;
   margin-right: 14px;
@@ -32,7 +32,7 @@
   padding: 0 8px;
 }
 
-.Item p.Title::before {
+.item p.title::before {
   content: '';
   display: inline-block;
   position: absolute;
@@ -45,16 +45,16 @@
   transition: width 0.2s ease-in-out;
 }
 
-.Item.Done {
+.item.done {
   color: var(--app-blured-color);
 }
 
-.Item.Done p.Title::before {
+.item.done p.title::before {
   width: 100%;
   transition: width 0.5s ease-in-out;
 }
 
-.Item input.Title {
+.item input.title {
   background-color: var(--app-item-bg-color);
   color: var(--app-text-color);
   /* same as p by default */
@@ -63,39 +63,39 @@
   border: none;
 }
 
-.Item .Checkbox rect,
-.Item .Checkbox path {
+.item .checkbox rect,
+.item .checkbox path {
   stroke: var(--app-text-color);
 }
 
-.Item.Done .Checkbox rect,
-.Item.Done .Checkbox path {
+.item.done .checkbox rect,
+.item.done .checkbox path {
   stroke: var(--app-blured-color);
 }
 
-.Action {
+.action {
   height: 20px;
   width: 20px;
   cursor: pointer;
 }
 
-.Checkbox:hover rect,
-.Checkbox:hover path {
+.checkbox:hover rect,
+.checkbox:hover path {
   stroke: var(--app-focused-color);
 }
 
-.Delete:hover path {
+.delete:hover path {
   fill: var(--app-focused-color);
 }
 
-.Edit {
+.edit {
   margin-right: 8px;
 }
 
-.Edit path {
+.edit path {
   fill: var(--app-blured-color);
 }
 
-.Edit:hover path {
+.edit:hover path {
   fill: var(--app-focused-color);
 }

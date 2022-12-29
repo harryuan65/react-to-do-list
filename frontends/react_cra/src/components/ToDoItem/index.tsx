@@ -21,7 +21,9 @@ const ToDoItem = ({
   handleDelete,
   item,
 }: ToDoItemProps) => {
-  const onClick = (event: React.MouseEvent) => {
+  const onItemClick = () => handleClick(item.id);
+
+  const onCheckboxClick = (event: React.MouseEvent) => {
     handleClick(item.id);
     event.stopPropagation();
   };
@@ -34,12 +36,12 @@ const ToDoItem = ({
   const onEdit = (event: React.ChangeEvent) => {
     const target = event.target as HTMLInputElement;
     handleEdit(target.value, item.id);
-    event.stopPropagation();
   };
 
-  const onDelete = (event: React.MouseEvent) => {
+  const onEnterKey = (event: React.KeyboardEvent) => event.key === 'Enter' && toggleEdit(item.id);
+
+  const onTrashBinClick = () => {
     handleDelete(item.id);
-    event.stopPropagation();
   };
 
   const editProps = {
@@ -56,7 +58,7 @@ const ToDoItem = ({
       <input
         onClick={(event) => event.stopPropagation()}
         onChange={onEdit}
-        onKeyDown={(event) => { event.key === 'Enter' && toggleEdit(item.id); }}
+        onKeyDown={onEnterKey}
         className={styles.title}
         type="text"
         value={item.title}
@@ -74,16 +76,16 @@ const ToDoItem = ({
   return (
     <div
       className={itemClasses}
-      onClick={() => handleClick(item.id)}
+      onClick={onItemClick}
     >
       <Checkbox
-        onClick={onClick}
+        onClick={onCheckboxClick}
         checked={item.status === ToDoItemStatus.DONE}
       />
       {content}
       {EditButton}
       <TrashBinSVG
-        onClick={onDelete}
+        onClick={onTrashBinClick}
         className={[styles.action, styles.delete].join(' ')}
       />
     </div>

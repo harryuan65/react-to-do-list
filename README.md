@@ -1,6 +1,8 @@
-# React CRA
+# To-do List Client - React
 
 This is a simple to-do list using React & Typescript, created with create-react-app.
+
+[Demo on github pages](https://harryuan65.github.io/to-do-list-react/)
 
 ## Environment
 

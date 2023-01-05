@@ -1,5 +1,5 @@
 enum ToDoItemStatus {
-  ACTIVE=1, DONE
+  ACTIVE='active', DONE='done'
 }
 
 // For server

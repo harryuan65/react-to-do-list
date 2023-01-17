@@ -1,11 +1,14 @@
 import React from 'react';
 import classes from './App.module.css';
 import AdditionBar from './components/AdditionBar';
+import BackendSelect from './components/BackendSelect';
 import FilterBar from './components/FilterBar';
 import ToDoItems from './components/ToDoItems';
+import { useEndpoints } from './hooks/useEndpoints';
 import useToDoItems from './hooks/useToDoItems';
 
 function App () {
+  const { endpoint, availableEndpoints, onChange } = useEndpoints();
   const {
     addTodo,
     toggleEdit,
@@ -23,6 +26,7 @@ function App () {
 
   return (
     <div className={classes.container}>
+      <BackendSelect endpoint={endpoint} availableEndpoints={availableEndpoints} onChange={onChange}/>
       <FilterBar
         filterStatus={filterStatus}
         searchTerm={searchTerm}

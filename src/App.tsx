@@ -1,5 +1,6 @@
 import React from 'react';
 import classes from './App.module.css';
+import AdditionBar from './components/AdditionBar';
 import FilterBar from './components/FilterBar';
 import ToDoItems from './components/ToDoItems';
 import useToDoItems from './hooks/useToDoItems';
@@ -45,22 +46,10 @@ function App () {
         handleEdit={handleEdit}
         handleClick={handleClick}
         handleDelete={handleDelete}/>
-      <div className={classes.additionBar}>
-        <input
-          type="text"
-          onChange={({ target }) => {
-            setNewTitle(target.value);
-          }}
-          onKeyUp={(event) => {
-            if (event.key === 'Enter') {
-              addTodo();
-            }
-          }}
-          placeholder="Add a Task..."
-          value={newTitle}
-        />
-        <button className={classes.add} onClick={addTodo}>ADD</button>
-      </div>
+      <AdditionBar newTitle={newTitle} onChange={({ target }) => {
+        setNewTitle(target.value);
+      }} onEnterKey={addTodo} onClick={addTodo}/>
+
     </div>
   );
 }

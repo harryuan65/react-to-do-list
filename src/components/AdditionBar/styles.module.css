@@ -1,0 +1,25 @@
+.additionBar input,
+.additionBar button {
+  color: var(--app-text-color);
+  background-color: var(--app-item-bg-color);
+  border: var(--app-border);
+  padding: var(--app-input-padding);
+}
+
+.additionBar {
+  display: flex;
+  justify-content: space-between;
+}
+
+.additionBar input {
+  width: 70%;
+}
+
+.additionBar button {
+  width: 80px;
+}
+
+.add:hover {
+  opacity: 0.7;
+  cursor: pointer;
+}

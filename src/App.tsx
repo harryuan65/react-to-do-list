@@ -20,6 +20,18 @@ function App () {
     filterStatus,
   } = useToDoItems();
 
+  let renderItems = null;
+
+  if (filteredItems.length === 0) {
+    renderItems = <h2 className={classes.emptyMessage}>Oh! Looks like there is nothing to do.</h2>;
+  } else {
+    renderItems = <ToDoItems items={filteredItems}
+      toggleEdit={toggleEdit}
+      handleEdit={handleEdit}
+      handleClick={handleClick}
+      handleDelete={handleDelete}/>;
+  }
+
   return (
     <div className={classes.container}>
       <FilterBar
@@ -28,15 +40,7 @@ function App () {
         onSearch={(event) => { setSearchTerm((event.target as HTMLInputElement).value); }}
         onFilter={handleSetFilter}
       />
-      {
-        (filteredItems.length === 0
-          ? <h2 className={classes.emptyMessage}>Oh! Looks like there is nothing to do.</h2>
-          : <ToDoItems items={filteredItems}
-            toggleEdit={toggleEdit}
-            handleEdit={handleEdit}
-            handleClick={handleClick}
-            handleDelete={handleDelete}/>)
-      }
+      {renderItems}
       <div className={classes.additionBar}>
         <input
           type="text"

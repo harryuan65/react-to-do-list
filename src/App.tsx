@@ -67,10 +67,6 @@ function App () {
     setFilterStatus(status);
   };
 
-  const handleSearch = (value: string) => {
-    setSearchTerm(value);
-  };
-
   let filteredItems: IToDoItemState[] = items;
   filteredItems = filterStatus ? items.filter(item => item.status === filterStatus) : items;
   filteredItems = searchTerm ? items.filter(item => item.title.match(new RegExp(searchTerm, 'gi'))) : filteredItems;
@@ -80,7 +76,7 @@ function App () {
       <FilterBar
         filterStatus={filterStatus}
         searchTerm={searchTerm}
-        onSearch={(event) => { handleSearch((event.target as HTMLInputElement).value); }}
+        onSearch={(event) => { setSearchTerm((event.target as HTMLInputElement).value); }}
         onFilter={handleSetFilter}
       />
       {

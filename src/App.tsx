@@ -40,7 +40,11 @@ function App () {
         onSearch={(event) => { setSearchTerm((event.target as HTMLInputElement).value); }}
         onFilter={handleSetFilter}
       />
-      {renderItems}
+      <ToDoItems items={filteredItems}
+        toggleEdit={toggleEdit}
+        handleEdit={handleEdit}
+        handleClick={handleClick}
+        handleDelete={handleDelete}/>
       <div className={classes.additionBar}>
         <input
           type="text"

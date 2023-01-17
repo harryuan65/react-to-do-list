@@ -10,15 +10,15 @@ interface ToDoItemsProps {
   handleClick: (id: number) => void,
   handleDelete: (id: number) => void,
 }
-const ToDoItems = ({
-  items,
-  toggleEdit,
-  handleEdit,
-  handleClick,
-  handleDelete,
-}: ToDoItemsProps) => {
-  return <div className={styles.items}>
-    {items.map((item) => (
+const ToDoItems = (props: ToDoItemsProps) => {
+  const { items, toggleEdit, handleEdit, handleClick, handleDelete } = props;
+
+  let renderToDoItems = null;
+
+  if (items.length === 0) {
+    renderToDoItems = <h2 className={styles.emptyMessage}>Oh! Looks like there is nothing to do.</h2>;
+  } else {
+    renderToDoItems = items.map((item) => (
       <ToDoItem
         key={item.id}
         toggleEdit={toggleEdit}
@@ -27,7 +27,11 @@ const ToDoItems = ({
         handleDelete={handleDelete}
         item={item}
       />
-    ))}
+    ));
+  }
+
+  return <div className={styles.items}>
+    {renderToDoItems}
   </div>;
 };
 

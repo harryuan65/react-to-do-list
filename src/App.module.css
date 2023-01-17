@@ -18,15 +18,6 @@
   font-size: 14px;
 }
 
-.emptyMessage {
-  color: var(--app-blured-color);
-  font-weight: normal;
-}
-
-.emptyMessage::before {
-  content: '> ';
-}
-
 .additionBar input,
 .additionBar button {
   color: var(--app-text-color);

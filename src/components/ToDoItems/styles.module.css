@@ -1,3 +1,12 @@
 .items {
   min-height: 212px;
 }
+
+.emptyMessage {
+  color: var(--app-blured-color);
+  font-weight: normal;
+}
+
+.emptyMessage::before {
+  content: '> ';
+}

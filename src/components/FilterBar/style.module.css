@@ -1,0 +1,28 @@
+.filterBar {
+  display: flex;
+  justify-content: space-between;
+}
+
+.filterBar input {
+  min-width: 55%;
+  padding: var(--app-input-padding);
+  background-color: var(--app-item-bg-color);
+  border: var(--app-border);
+  color: var(--app-text-color);
+}
+
+.statuses span {
+  display: inline-block;
+  width: 40px;
+  background-color: var(--app-item-bg-color);
+  border: var(--app-border);
+  padding: var(--app-input-padding);
+  text-align: center;
+  cursor: pointer;
+  color: var(--app-blured-color);
+}
+
+.statuses span.active {
+  color: var(--app-text-color);
+  font-weight: bold;
+}

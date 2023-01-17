@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import classes from './App.module.css';
+import FilterBar from './components/FilterBar';
 import ToDoItems from './components/ToDoItems';
 import { DummyToDoItems } from './constants';
 import { IToDoItemState, ToDoItemStatus } from './types';
@@ -74,21 +75,14 @@ function App () {
   filteredItems = filterStatus ? items.filter(item => item.status === filterStatus) : items;
   filteredItems = searchTerm ? items.filter(item => item.title.match(new RegExp(searchTerm, 'gi'))) : filteredItems;
 
-  // Add active class to span when current filter status matches with it
-  const statusClassesFor = (targetStatus: ToDoItemStatus | null) => {
-    return [filterStatus === targetStatus && classes.active, classes.filterStatus].join(' ');
-  };
-
   return (
     <div className={classes.container}>
-      <div className={classes.filterBar}>
-        <input placeholder="Search something..." type="text" value={searchTerm} onChange={(event) => { handleSearch(event.target.value); }} className={classes.search} />
-        <div className={classes.statuses}>
-          <span onClick={() => handleSetFilter(null)} className={statusClassesFor(null)}>All</span>
-          <span onClick={() => handleSetFilter(ToDoItemStatus.ACTIVE)} className={statusClassesFor(ToDoItemStatus.ACTIVE)}>Active</span>
-          <span onClick={() => handleSetFilter(ToDoItemStatus.DONE)} className={statusClassesFor(ToDoItemStatus.DONE)}>Done</span>
-        </div>
-      </div>
+      <FilterBar
+        filterStatus={filterStatus}
+        searchTerm={searchTerm}
+        onSearch={(event) => { handleSearch((event.target as HTMLInputElement).value); }}
+        onFilter={handleSetFilter}
+      />
       {
         (filteredItems.length === 0
           ? <h2 className={classes.emptyMessage}>Oh! Looks like there is nothing to do.</h2>

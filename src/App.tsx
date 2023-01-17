@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import classes from './App.module.css';
 import ToDoItems from './components/ToDoItems';
 import { DummyToDoItems } from './constants';
-import { ToDoItemState, ToDoItemStatus } from './types';
+import { IToDoItemState, ToDoItemStatus } from './types';
 
 function App () {
   const [newTitle, setNewTitle] = useState<string>('');
-  const [items, setItems] = useState<ToDoItemState[]>(DummyToDoItems);
+  const [items, setItems] = useState<IToDoItemState[]>(DummyToDoItems);
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [filterStatus, setFilterStatus] = useState<ToDoItemStatus| null>(null);
 
@@ -70,7 +70,7 @@ function App () {
     setSearchTerm(value);
   };
 
-  let filteredItems: ToDoItemState[] = items;
+  let filteredItems: IToDoItemState[] = items;
   filteredItems = filterStatus ? items.filter(item => item.status === filterStatus) : items;
   filteredItems = searchTerm ? items.filter(item => item.title.match(new RegExp(searchTerm, 'gi'))) : filteredItems;
 

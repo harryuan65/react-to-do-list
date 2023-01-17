@@ -1,10 +1,10 @@
 import React from 'react';
-import { ToDoItemState } from '../../types';
+import { IToDoItemState } from '../../types';
 import ToDoItem from '../ToDoItem';
 import styles from './styles.module.css';
 
 interface ToDoItemsProps {
-  items: ToDoItemState[],
+  items: IToDoItemState[],
   toggleEdit: (id: number) => void,
   handleEdit: (value: string, id: number) => void,
   handleClick: (id: number) => void,

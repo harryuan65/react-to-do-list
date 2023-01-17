@@ -3,15 +3,15 @@ enum ToDoItemStatus {
 }
 
 // For server
-interface ToDoItemData {
+interface IToDoItemData {
   id: number,
   title: string,
   status: ToDoItemStatus
 }
 
 // For client
-interface ToDoItemState extends ToDoItemData {
+interface IToDoItemState extends IToDoItemData {
   editing?: boolean;
 }
 
-export { ToDoItemStatus, type ToDoItemData, type ToDoItemState };
+export { ToDoItemStatus, type IToDoItemData, type IToDoItemState };

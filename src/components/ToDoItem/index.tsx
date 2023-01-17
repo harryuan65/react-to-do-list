@@ -1,5 +1,5 @@
 import React from 'react';
-import { ToDoItemState, ToDoItemStatus } from '../../types';
+import { IToDoItemState, ToDoItemStatus } from '../../types';
 import { ReactComponent as CheckSVG } from '../../assets/Check.svg';
 import { ReactComponent as TrashBinSVG } from '../../assets/TrashBin.svg';
 import { ReactComponent as EditSVG } from '../../assets/Edit.svg';
@@ -11,7 +11,7 @@ interface ToDoItemProps {
   handleEdit: (value: string, id: number) => void;
   handleClick: (id: number) => void;
   handleDelete: (id: number) => void;
-  item: ToDoItemState;
+  item: IToDoItemState;
 }
 
 const ToDoItem = ({

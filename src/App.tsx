@@ -46,10 +46,10 @@ function App () {
         handleEdit={handleEdit}
         handleClick={handleClick}
         handleDelete={handleDelete}/>
-      <AdditionBar newTitle={newTitle} onChange={({ target }) => {
-        setNewTitle(target.value);
-      }} onEnterKey={addTodo} onClick={addTodo}/>
-
+      <AdditionBar newTitle={newTitle}
+        onChange={({ target }) => setNewTitle(target.value)}
+        onEnterKey={addTodo}
+        onClick={addTodo}/>
     </div>
   );
 }

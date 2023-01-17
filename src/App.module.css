@@ -61,3 +61,9 @@
   color: var(--app-focused-color);
   font-weight: bold;
 }
+
+@media screen and (max-width: 414px) {
+  .container {
+    padding: 40px;
+  }
+}

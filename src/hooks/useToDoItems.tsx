@@ -9,19 +9,26 @@ const useToDoItems = (endpoint: Endpoint) => {
   const [items, setItems] = useState<IToDoItemState[]>([]);
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [filterStatus, setFilterStatus] = useState<ToDoItemStatus| null>(null);
+
+  // States for using an endpoint
   const [useEndpoint, setUseEndpoint] = useState<boolean>(false);
   const [error, setError] = useState<Error|null>(null);
+  const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
     initialize();
   }, [endpoint]);
 
-  // Error handlers
-  const handleError = (handler: () => Promise<void> | (() => void)) => {
+  // Handles request loading and set error if any
+  const handleRequest = async (task: () => Promise<void>) => {
     try {
-      handler();
+      setLoading(true);
+      await task();
       setError(null);
+      setLoading(false);
     } catch (error) {
+      console.log('Error!');
+      console.error(error);
       setError(error as Error);
     }
   };
@@ -32,7 +39,7 @@ const useToDoItems = (endpoint: Endpoint) => {
     } else {
       // Use ToDoItems Data from chosen Endpoint
       // GET /to_do_items
-      handleError(async () => {
+      handleRequest(async () => {
         const { url } = endpoint;
         setUseEndpoint(true);
         const response = await getToDoItemsApi(url);
@@ -61,6 +68,13 @@ const useToDoItems = (endpoint: Endpoint) => {
       })
     );
   };
+  const setItemsWithNewItem = (newItem: IToDoItemState) => {
+    setItems([
+      ...items,
+      newItem,
+    ]);
+    setNewTitle('');
+  };
 
   const toggleItemStatus = (item: IToDoItemState) => {
     if (item.status === ToDoItemStatus.ACTIVE) {
@@ -77,27 +91,20 @@ const useToDoItems = (endpoint: Endpoint) => {
   const addTodo = async () => {
     // Prevent creating empty to-dos
     if (!newTitle) return;
+
     const newItem = { id: items.length + 1, title: newTitle, status: ToDoItemStatus.ACTIVE };
 
     if (!useEndpoint) {
-      setItems([
-        ...items,
-        newItem,
-      ]);
-      setNewTitle('');
+      setItemsWithNewItem(newItem);
+      return;
     }
 
     // POST /to_do_items
-    handleError(async () => {
+    handleRequest(async () => {
       const response = await createToDoItemApi(endpoint.url, newItem);
       const responseItem = response.data as IToDoItemState;
-      newItem.id = responseItem.id;
 
-      setItems([
-        ...items,
-        newItem,
-      ]);
-      setNewTitle('');
+      setItemsWithNewItem({ ...newItem, id: responseItem.id }); // Sync id from backend
     });
   };
 
@@ -109,7 +116,7 @@ const useToDoItems = (endpoint: Endpoint) => {
 
     // Save Item's new title
     // PATCH /to_do_items/:id
-    handleError(async () => {
+    handleRequest(async () => {
       const targetItem = items.find(item => item.id === id) as IToDoItemState;
       await updateToDoItemApi(endpoint.url, targetItem);
       setItemsWithNewEditState(id);
@@ -134,7 +141,7 @@ const useToDoItems = (endpoint: Endpoint) => {
     }
 
     // PATCH /to_do_items/:id
-    handleError(async () => {
+    handleRequest(async () => {
       let targetItem = { ...items.find(item => item.id === id) as IToDoItemState };
       targetItem = toggleItemStatus(targetItem);
       await updateToDoItemApi(endpoint.url, targetItem);
@@ -149,7 +156,7 @@ const useToDoItems = (endpoint: Endpoint) => {
     }
 
     // DELETE /to_do_items/:id
-    handleError(async () => {
+    handleRequest(async () => {
       const targetItem = items.find(item => item.id === id) as IToDoItemState;
       await deleteToDoItemApi(endpoint.url, targetItem);
       setItems(items.filter((item) => item.id !== id));
@@ -180,6 +187,7 @@ const useToDoItems = (endpoint: Endpoint) => {
     setSearchTerm,
     filterStatus,
     setFilterStatus,
+    loading,
     error
   };
 };

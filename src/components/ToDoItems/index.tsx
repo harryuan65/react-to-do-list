@@ -9,9 +9,10 @@ interface ToDoItemsProps {
   handleEdit: (value: string, id: number) => void,
   handleClick: (id: number) => void,
   handleDelete: (id: number) => void,
+  loading: boolean
 }
 const ToDoItems = (props: ToDoItemsProps) => {
-  const { items, toggleEdit, handleEdit, handleClick, handleDelete } = props;
+  const { items, toggleEdit, handleEdit, handleClick, handleDelete, loading } = props;
 
   let renderToDoItems = null;
 
@@ -29,9 +30,10 @@ const ToDoItems = (props: ToDoItemsProps) => {
       />
     ));
   }
-
+  const loader = <div className={styles.loaderCover}><div className={styles.loader}></div></div>;
   return <div className={styles.items}>
     {renderToDoItems}
+    {loading && loader}
   </div>;
 };
 

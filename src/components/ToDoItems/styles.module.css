@@ -1,5 +1,6 @@
 .items {
   min-height: 212px;
+  position: relative;
 }
 
 .emptyMessage {
@@ -9,4 +10,36 @@
 
 .emptyMessage::before {
   content: '> ';
+}
+
+.loaderCover {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  z-index: 10;
+  background-color: var(--app-item-bg-color);
+  opacity: 0.6;
+  top: 0;
+  display: grid;
+  place-items: center;
+  transition: opacity 1s ease;
+}
+
+.loaderCover .loader {
+  border-radius: 50%;
+  border-width: 10px;
+  border-style: solid;
+  border-color: #efefef #efefef #efefef #7d7d7d;
+  width: 70px;
+  height: 70px;
+  animation: rotate 1s infinite;
+}
+
+@keyframes rotate {
+  to {
+    transform: rotate(360deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }

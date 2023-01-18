@@ -23,6 +23,7 @@ function App () {
     setSearchTerm,
     filterStatus,
     error,
+    loading
   } = useToDoItems(endpoint);
 
   return (
@@ -36,6 +37,7 @@ function App () {
         onFilter={handleSetFilter}
       />
       <ToDoItems items={filteredItems}
+        loading={loading}
         toggleEdit={toggleEdit}
         handleEdit={handleEdit}
         handleClick={handleClick}

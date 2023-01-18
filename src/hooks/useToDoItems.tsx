@@ -32,6 +32,39 @@ const useToDoItems = (endpoint: Endpoint) => {
     }
   };
   const clearError = () => setError(null);
+  // Set state wrappers
+  const setItemsWithNewEditState = (id: number) => {
+    setItems(items.map((item) => {
+      if (item.id === id) {
+        item.editing = !item.editing;
+      }
+      return item;
+    }));
+  };
+
+  const setItemsWithToggledStatus = (id: number) => {
+    setItems(
+      items.map((item) => {
+        if (item.id === id) {
+          item = toggleItemStatus(item);
+        }
+        return item;
+      })
+    );
+  };
+
+  const toggleItemStatus = (item: IToDoItemState) => {
+    if (item.status === ToDoItemStatus.ACTIVE) {
+      item.status = ToDoItemStatus.DONE;
+    } else {
+      item.status = ToDoItemStatus.ACTIVE;
+    }
+    return item;
+  };
+
+  // Endpoint Actions
+
+  // Local Handlers
   const addTodo = async () => {
     // Prevent creating empty to-dos
     if (!newTitle) return;
@@ -63,28 +96,15 @@ const useToDoItems = (endpoint: Endpoint) => {
 
   const toggleEdit = async (id: number) => {
     if (!useEndpoint) {
-      setItems(
-        items.map((item) => {
-          if (item.id === id) {
-            item.editing = !item.editing;
-          }
-          return item;
-        })
-      );
+      setItemsWithNewEditState(id);
       return;
     }
 
+    // Save Item's new title
     const targetItem = items.find(item => item.id === id) as IToDoItemState;
     try {
       await updateToDoItemApi(endpoint.url, targetItem);
-      setItems(
-        items.map((item) => {
-          if (item.id === id) {
-            item.editing = !item.editing;
-          }
-          return item;
-        })
-      );
+      setItemsWithNewEditState(id);
       clearError();
     } catch (error) {
       setError(error as Error);
@@ -104,41 +124,15 @@ const useToDoItems = (endpoint: Endpoint) => {
 
   const handleClick = async (id: number) => {
     if (!useEndpoint) {
-      setItems(
-        items.map((item) => {
-          if (item.id === id) {
-            if (item.status === ToDoItemStatus.ACTIVE) {
-              item.status = ToDoItemStatus.DONE;
-            } else {
-              item.status = ToDoItemStatus.ACTIVE;
-            }
-          }
-          return item;
-        })
-      );
+      setItemsWithToggledStatus(id);
       return;
     }
 
-    const targetItem = { ...items.find(item => item.id === id) as IToDoItemState };
-    if (targetItem.status === ToDoItemStatus.ACTIVE) {
-      targetItem.status = ToDoItemStatus.DONE;
-    } else {
-      targetItem.status = ToDoItemStatus.ACTIVE;
-    }
+    let targetItem = { ...items.find(item => item.id === id) as IToDoItemState };
+    targetItem = toggleItemStatus(targetItem);
     try {
       await updateToDoItemApi(endpoint.url, targetItem);
-      setItems(
-        items.map((item) => {
-          if (item.id === id) {
-            if (item.status === ToDoItemStatus.ACTIVE) {
-              item.status = ToDoItemStatus.DONE;
-            } else {
-              item.status = ToDoItemStatus.ACTIVE;
-            }
-          }
-          return item;
-        })
-      );
+      setItemsWithToggledStatus(id);
       clearError();
     } catch (error) {
       setError(error as Error);

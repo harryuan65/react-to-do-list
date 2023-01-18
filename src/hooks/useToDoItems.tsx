@@ -35,6 +35,7 @@ const useToDoItems = (endpoint: Endpoint) => {
 
   const initialize = async () => {
     if (endpoint.name === 'Local dummy data') {
+      setUseEndpoint(false);
       setItems(DummyToDoItems);
     } else {
       // Use ToDoItems Data from chosen Endpoint

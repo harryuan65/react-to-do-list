@@ -23,6 +23,7 @@ const useToDoItems = (endpoint: Endpoint) => {
   const handleRequest = async (task: () => Promise<void>) => {
     try {
       setLoading(true);
+      await new Promise((resolve) => { setTimeout(resolve, 800); }); // better experience when load for awhile
       await task();
       setError(null);
       setLoading(false);

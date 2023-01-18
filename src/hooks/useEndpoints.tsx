@@ -16,7 +16,7 @@ const useEndpoints = () => {
     defaultEndpoint,
     {
       name: 'Rails',
-      url: 'http://localhost:3000', // python
+      url: 'http://localhost:3002',
     },
   ];
 

@@ -22,10 +22,12 @@ function App () {
     searchTerm,
     setSearchTerm,
     filterStatus,
-  } = useToDoItems();
+    error,
+  } = useToDoItems(endpoint);
 
   return (
     <div className={classes.container}>
+      {error && <p className={classes.errorMessage}> {error.message}</p>}
       <BackendSelect endpoint={endpoint} availableEndpoints={availableEndpoints} onChange={onChange}/>
       <FilterBar
         filterStatus={filterStatus}

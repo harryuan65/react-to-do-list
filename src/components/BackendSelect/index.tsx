@@ -11,9 +11,10 @@ interface BackendSelectProps {
 const BackendSelect = ({ endpoint, availableEndpoints, onChange }: BackendSelectProps) => {
   return (
     <>
-      <select className={styles.select} name="" id="" onChange={onChange}>
-        {availableEndpoints.map((endpoint, i) => <option key={endpoint.name} value={i} data-index={i}>{endpoint.name}</option>)}
+      <select className={styles.select} name="endpoint" id="endpoint" onChange={onChange}>
+        {availableEndpoints.map((endpoint, i) => <option key={endpoint.name} value={i}>{endpoint.name}</option>)}
       </select>
+      <p className={styles.usingUrl}>Using {endpoint.name}: {endpoint.url}</p>
     </>
   );
 };

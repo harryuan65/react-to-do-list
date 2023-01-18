@@ -5,3 +5,7 @@
   border: var(--app-border);
   color: var(--app-text-color);
 }
+
+.usingUrl {
+  color: var(--app-text-color);
+}

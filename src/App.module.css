@@ -23,3 +23,7 @@
     padding: 40px;
   }
 }
+
+.errorMessage {
+  color: red;
+}

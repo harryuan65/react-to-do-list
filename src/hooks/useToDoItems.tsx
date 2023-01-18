@@ -16,22 +16,31 @@ const useToDoItems = (endpoint: Endpoint) => {
     initialize();
   }, [endpoint]);
 
+  // Error handlers
+  const handleError = (handler: () => Promise<void> | (() => void)) => {
+    try {
+      handler();
+      setError(null);
+    } catch (error) {
+      setError(error as Error);
+    }
+  };
+
   const initialize = async () => {
     if (endpoint.name === 'Local dummy data') {
       setItems(DummyToDoItems);
     } else {
-      const { url } = endpoint;
-      setUseEndpoint(true);
-      try {
+      // Use ToDoItems Data from chosen Endpoint
+      // GET /to_do_items
+      handleError(async () => {
+        const { url } = endpoint;
+        setUseEndpoint(true);
         const response = await getToDoItemsApi(url);
         setItems(response.data as IToDoItemState[]);
-        clearError();
-      } catch (error) {
-        setError(error as Error);
-      }
+      });
     }
   };
-  const clearError = () => setError(null);
+
   // Set state wrappers
   const setItemsWithNewEditState = (id: number) => {
     setItems(items.map((item) => {
@@ -78,20 +87,18 @@ const useToDoItems = (endpoint: Endpoint) => {
       setNewTitle('');
     }
 
-    try {
+    // POST /to_do_items
+    handleError(async () => {
       const response = await createToDoItemApi(endpoint.url, newItem);
       const responseItem = response.data as IToDoItemState;
       newItem.id = responseItem.id;
-      clearError();
-    } catch (error) {
-      setError(error as Error);
-      return;
-    }
-    setItems([
-      ...items,
-      newItem,
-    ]);
-    setNewTitle('');
+
+      setItems([
+        ...items,
+        newItem,
+      ]);
+      setNewTitle('');
+    });
   };
 
   const toggleEdit = async (id: number) => {
@@ -101,14 +108,12 @@ const useToDoItems = (endpoint: Endpoint) => {
     }
 
     // Save Item's new title
-    const targetItem = items.find(item => item.id === id) as IToDoItemState;
-    try {
+    // PATCH /to_do_items/:id
+    handleError(async () => {
+      const targetItem = items.find(item => item.id === id) as IToDoItemState;
       await updateToDoItemApi(endpoint.url, targetItem);
       setItemsWithNewEditState(id);
-      clearError();
-    } catch (error) {
-      setError(error as Error);
-    }
+    });
   };
 
   const handleEdit = (value: string, id: number) => {
@@ -128,15 +133,13 @@ const useToDoItems = (endpoint: Endpoint) => {
       return;
     }
 
-    let targetItem = { ...items.find(item => item.id === id) as IToDoItemState };
-    targetItem = toggleItemStatus(targetItem);
-    try {
+    // PATCH /to_do_items/:id
+    handleError(async () => {
+      let targetItem = { ...items.find(item => item.id === id) as IToDoItemState };
+      targetItem = toggleItemStatus(targetItem);
       await updateToDoItemApi(endpoint.url, targetItem);
       setItemsWithToggledStatus(id);
-      clearError();
-    } catch (error) {
-      setError(error as Error);
-    }
+    });
   };
 
   const handleDelete = async (id: number) => {
@@ -145,14 +148,12 @@ const useToDoItems = (endpoint: Endpoint) => {
       return;
     }
 
-    const targetItem = items.find(item => item.id === id) as IToDoItemState;
-    try {
+    // DELETE /to_do_items/:id
+    handleError(async () => {
+      const targetItem = items.find(item => item.id === id) as IToDoItemState;
       await deleteToDoItemApi(endpoint.url, targetItem);
       setItems(items.filter((item) => item.id !== id));
-      clearError();
-    } catch (error) {
-      setError(error as Error);
-    }
+    });
   };
 
   const handleSetFilter = (status: ToDoItemStatus | null) => {

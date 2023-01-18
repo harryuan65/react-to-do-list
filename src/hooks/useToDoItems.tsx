@@ -26,12 +26,12 @@ const useToDoItems = (endpoint: Endpoint) => {
       await new Promise((resolve) => { setTimeout(resolve, 800); }); // better experience when load for awhile
       await task();
       setError(null);
-      setLoading(false);
     } catch (error) {
       console.log('Error!');
       console.error(error);
       setError(error as Error);
     }
+    setLoading(false);
   };
 
   const initialize = async () => {

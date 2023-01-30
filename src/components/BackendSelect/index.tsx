@@ -12,7 +12,7 @@ const BackendSelect = ({ endpoint, availableEndpoints, onChange }: BackendSelect
   return (
     <>
       <select className={styles.select} name="endpoint" id="endpoint" onChange={onChange}>
-        {availableEndpoints.map((endpoint, i) => <option key={endpoint.name} value={i}>{endpoint.name}</option>)}
+        {availableEndpoints.map((endpoint, i) => <option key={endpoint.name} value={i}>{`${endpoint.name}(${endpoint.url})`}</option>)}
       </select>
       <p className={styles.usingUrl}>Using {endpoint.name}: {endpoint.url}</p>
     </>

@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/to-do-list-react/static/css/main.7ec63caa.css",
-    "main.js": "/to-do-list-react/static/js/main.55e89b65.js",
+    "main.js": "/to-do-list-react/static/js/main.729cf242.js",
     "static/js/787.d1b892bc.chunk.js": "/to-do-list-react/static/js/787.d1b892bc.chunk.js",
     "static/media/TrashBin.svg": "/to-do-list-react/static/media/TrashBin.61f08cbd4d6f765dd1ad05b67b9ff622.svg",
     "static/media/Edit.svg": "/to-do-list-react/static/media/Edit.808bc66797c6c1c1d6859d443ee17efb.svg",
@@ -10,11 +10,11 @@
     "static/media/Check.svg": "/to-do-list-react/static/media/Check.69ea9c240a956b6fb2b75165a33a91de.svg",
     "static/media/Checkbox__unchecked.svg": "/to-do-list-react/static/media/Checkbox__unchecked.26f98618170df9348f113191b0d202bd.svg",
     "main.7ec63caa.css.map": "/to-do-list-react/static/css/main.7ec63caa.css.map",
-    "main.55e89b65.js.map": "/to-do-list-react/static/js/main.55e89b65.js.map",
+    "main.729cf242.js.map": "/to-do-list-react/static/js/main.729cf242.js.map",
     "787.d1b892bc.chunk.js.map": "/to-do-list-react/static/js/787.d1b892bc.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.7ec63caa.css",
-    "static/js/main.55e89b65.js"
+    "static/js/main.729cf242.js"
   ]
 }

@@ -18,6 +18,10 @@ const useEndpoints = () => {
       name: 'Rails',
       url: 'http://localhost:3003',
     },
+    {
+      name: 'Node',
+      url: 'http://localhost:3004',
+    },
   ];
 
   const onChange = (event: React.ChangeEvent) => {

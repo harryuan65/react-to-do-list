@@ -121,7 +121,11 @@ const useToDoItems = (endpoint: Endpoint) => {
     // PATCH /to_do_items/:id
     handleRequest(async () => {
       const targetItem = items.find(item => item.id === id) as IToDoItemState;
-      await updateToDoItemApi(endpoint.url, targetItem);
+      const clonedItem = { ...targetItem };
+      if (clonedItem.editing) {
+        delete clonedItem.editing;
+        await updateToDoItemApi(endpoint.url, clonedItem);
+      }
       setItemsWithNewEditState(id);
     });
   };
@@ -145,9 +149,11 @@ const useToDoItems = (endpoint: Endpoint) => {
 
     // PATCH /to_do_items/:id
     handleRequest(async () => {
-      let targetItem = { ...items.find(item => item.id === id) as IToDoItemState };
-      targetItem = toggleItemStatus(targetItem);
-      await updateToDoItemApi(endpoint.url, targetItem);
+      const targetItem = { ...items.find(item => item.id === id) as IToDoItemState };
+      let clonedItem = { ...targetItem };
+      delete clonedItem.editing;
+      clonedItem = toggleItemStatus(clonedItem);
+      await updateToDoItemApi(endpoint.url, clonedItem);
       setItemsWithToggledStatus(id);
     });
   };

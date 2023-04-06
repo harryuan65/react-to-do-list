@@ -116,7 +116,7 @@ const useToDoItems = (usingServer: boolean, serverUrl: string) => {
   };
 
   const toggleEdit = async (id: number) => {
-    if (usingServer) {
+    if (!usingServer) {
       setItemsWithNewEditState(id);
       return;
     }

@@ -27,3 +27,16 @@
 .errorMessage {
   color: red;
 }
+
+input[type='text'],
+button {
+  padding: var(--app-input-padding);
+  background-color: var(--app-item-bg-color);
+  border: var(--app-border);
+  color: var(--app-text-color);
+}
+
+button:hover {
+  opacity: 0.7;
+  cursor: pointer;
+}

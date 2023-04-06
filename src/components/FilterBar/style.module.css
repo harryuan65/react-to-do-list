@@ -5,10 +5,6 @@
 
 .filterBar input {
   min-width: 55%;
-  padding: var(--app-input-padding);
-  background-color: var(--app-item-bg-color);
-  border: var(--app-border);
-  color: var(--app-text-color);
 }
 
 .statuses span {

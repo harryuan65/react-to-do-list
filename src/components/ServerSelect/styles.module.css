@@ -8,3 +8,17 @@
 .server span {
   font-size: large;
 }
+
+.serverSpecInfo {
+  background-color: #151414;
+  padding: 24px;
+}
+
+.serverSpecInfo a {
+  color: var(--app-text-color);
+  font-weight: bold;
+}
+
+.serverSpecInfo a:hover {
+  opacity: 0.7;
+}

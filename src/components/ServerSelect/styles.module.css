@@ -1,0 +1,10 @@
+.server {
+  display: grid;
+  align-items: center;
+  gap: 24px;
+  grid-template-columns: 24px 128px 256px 96px 96px;
+}
+
+.server span {
+  font-size: large;
+}

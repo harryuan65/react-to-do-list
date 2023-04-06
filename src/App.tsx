@@ -4,7 +4,7 @@ import AdditionBar from './components/AdditionBar';
 import FilterBar from './components/FilterBar';
 import ToDoItems from './components/ToDoItems';
 import useToDoItems from './hooks/useToDoItems';
-import Checkbox from './components/Checkbox';
+import ServerSelect from './components/ServerSelect';
 
 function App () {
   const [usingServer, setUsingServer] = useState(false);
@@ -35,17 +35,17 @@ function App () {
   return (
     <div className={classes.container}>
       {error && <p className={classes.errorMessage}> {error.message}</p>}
-      <div>
-        <p className={classes.server}><Checkbox checked={!usingServer} onClick={() => setUsingServer(false)}/> <span>Use Local Data</span></p>
-        <p className={classes.server}>
-          <Checkbox checked={usingServer} onClick={() => setUsingServer(true)}/>
-          <span>Use Server</span>
-          <input type="text" placeholder="host" value={host} onChange={(e) => setHost(e.target.value)} />
-          <input type="text" placeholder="PORT" value={port} onChange={(e) => setPort(Number(e.target.value))} />
-          <button onClick={updateServerUrl}>Save</button>
-        </p>
-        {usingServer && <span>Using Server: {serverUrl }</span>}
-      </div>
+      <ServerSelect
+        unuseServer={() => setUsingServer(false)}
+        useServer={() => setUsingServer(true)}
+        onChangeHost={(e) => setHost((e.target as HTMLInputElement).value)}
+        onChangePort={(e) => setPort(Number((e.target as HTMLInputElement).value))}
+        onSaveUpdateServerUrl={updateServerUrl}
+        serverUrl={serverUrl}
+        usingServer={usingServer}
+        host={host}
+        port={port}
+      />
       <FilterBar
         filterStatus={filterStatus}
         searchTerm={searchTerm}

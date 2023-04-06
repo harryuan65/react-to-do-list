@@ -4,8 +4,6 @@ import AdditionBar from './components/AdditionBar';
 import FilterBar from './components/FilterBar';
 import ToDoItems from './components/ToDoItems';
 import useToDoItems from './hooks/useToDoItems';
-import { ReactComponent as CheckedSVG } from './assets/Checkbox__checked.svg';
-import { ReactComponent as UncheckedSVG } from './assets/Checkbox__unchecked.svg';
 import Checkbox from './components/Checkbox';
 
 function App () {

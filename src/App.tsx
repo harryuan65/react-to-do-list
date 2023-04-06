@@ -4,6 +4,9 @@ import AdditionBar from './components/AdditionBar';
 import FilterBar from './components/FilterBar';
 import ToDoItems from './components/ToDoItems';
 import useToDoItems from './hooks/useToDoItems';
+import { ReactComponent as CheckedSVG } from './assets/Checkbox__checked.svg';
+import { ReactComponent as UncheckedSVG } from './assets/Checkbox__unchecked.svg';
+import Checkbox from './components/Checkbox';
 
 function App () {
   const [usingServer, setUsingServer] = useState(false);
@@ -35,8 +38,10 @@ function App () {
     <div className={classes.container}>
       {error && <p className={classes.errorMessage}> {error.message}</p>}
       <div>
-        <p><input type="radio" checked={!usingServer} onChange={() => setUsingServer(false)} />Local Data</p>
-        <p><input type="radio" checked={usingServer} onChange={() => setUsingServer(true)} />
+        <p className={classes.server}><Checkbox checked={!usingServer} onClick={() => setUsingServer(false)}/> <span>Use Local Data</span></p>
+        <p className={classes.server}>
+          <Checkbox checked={usingServer} onClick={() => setUsingServer(true)}/>
+          <span>Use Server</span>
           <input type="text" placeholder="host" value={host} onChange={(e) => setHost(e.target.value)} />
           <input type="text" placeholder="PORT" value={port} onChange={(e) => setPort(Number(e.target.value))} />
           <button onClick={updateServerUrl}>Save</button>
